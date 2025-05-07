@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/nullstyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="image/icon.ico">
+    <title data-i18n="aes_title">AES Encryption</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- Додаємо перемикач мови сюди, перед хедером -->
+        <div class="lang-switcher">
+            <div class="lang-dropdown" id="language-dropdown">
+                <div class="lang-current">
+                    <img src="image/photo/en.png" alt="English flag" class="lang-flag" id="current-flag">
+                    <span class="lang-name" id="current-language">English</span>
+                    <span class="lang-arrow"></span>
+                </div>
+                <div class="lang-options">
+                    <div class="lang-option" data-lang="en">
+                        <img src="image/photo/en.png" alt="English flag" class="lang-flag">
+                        <span class="lang-name">English</span>
+                    </div>
+                    <div class="lang-option" data-lang="ua">
+                        <img src="image/photo/ua.png" alt="Ukrainian flag" class="lang-flag">
+                        <span class="lang-name">Українська</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <header class="header">
+            <div class="container">
+                <div class="header_inner">
+                    <nav class="menu">
+                        <ul class="menu_list">
+                            <li class="menu_item">
+                                <a href="index.html" class="menu_link" data-i18n="home">Home</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="about.html" class="menu_link" data-i18n="about">About Us</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="tools.html" class="menu_link active" data-i18n="tools">Crypto Tools</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="faq.html" class="menu_link" data-i18n="faq">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a href="index.html" class="header_logo">
+                        <img src="image/logo.png" alt="logo" class="logo_img">
+                    </a>
+                    <div class="header_burger">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="faq">
+                <div class="container">
+                    <div class="faq_inner">
+                        <h1 class="faq_title" data-i18n="aes_title">AES Encryption</h1>
+                        
+                        <div class="otp_container">
+                            <!-- Text input section -->
+                            <div class="text-input-section">
+                                <p class="input-hint" data-i18n="aes_input_hint">Enter text and password to encrypt with AES-256</p>
+                                <textarea id="inputText" placeholder="" class="fixed-textarea" data-i18n-placeholder="aes_placeholder"></textarea>
+                                <div class="password-section">
+                                    <label for="passwordInput" data-i18n="aes_password_label">Password:</label>
+                                    <input type="password" id="passwordInput" class="password-input" data-i18n-placeholder="aes_password_placeholder">
+                                    <div class="format-indicator" data-i18n="aes_format_info">Supports text encryption with AES-256 CBC mode</div>
+                                </div>
+                                
+                                <div class="text-actions">
+                                    <button onclick="aesEncryptor.encryptText()" class="primary-btn" data-i18n="aes_encrypt_btn">Encrypt Text</button>
+                                </div>
+                                
+                                <!-- Encrypted results (hidden by default) -->
+                                <div id="encryptionResults" class="encryption-results" style="display: none;">
+                                    <h3 data-i18n="aes_encrypted_title">Encrypted Text (Base64):</h3>
+                                    <textarea id="encryptedTextArea" class="result-textarea" readonly></textarea>
+                                    <div class="result-actions">
+                                        <button onclick="aesEncryptor.copyEncryptedText()" class="secondary-btn" data-i18n="aes_copy_encrypted_btn">Copy Encrypted Text</button>
+                                        <button onclick="aesEncryptor.downloadEncryptedText()" class="secondary-btn" data-i18n="aes_download_encrypted_btn">Download Encrypted File</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section-divider" data-i18n="aes_or">OR</div>
+                            
+                            <!-- File encryption section -->
+                            <div class="file-input-section">
+                                <label for="inputFile" data-i18n="aes_select_file">Select a file to encrypt:</label>
+                                <input type="file" id="inputFile" />
+                                
+                                <div class="password-section">
+                                    <label for="filePasswordInput" data-i18n="aes_password_label">Password:</label>
+                                    <!-- <input type="password" id="filePasswordInput" class="password-input" placeholder="Enter encryption password"> -->
+                                    <input type="password" id="filePasswordInput" class="password-input" placeholder="" data-i18n-placeholder="aes_password_placeholder">
+                                </div>
+                                
+                                <button onclick="aesEncryptor.encryptFile()" class="primary-btn" data-i18n="aes_encrypt_file_btn">Encrypt File</button>
+                            </div>
+
+                            <br><br>
+
+                            <h2 data-i18n="aes_decryption_title">Decryption</h2>
+
+                            <!-- Text decryption section -->
+                            <div class="text-input-section">
+                                <p class="input-hint" data-i18n="aes_decrypt_hint">Paste encrypted text to decrypt</p>
+                                <textarea id="encryptedInput" placeholder="" class="fixed-textarea" data-i18n-placeholder="aes_decrypt_placeholder"></textarea>
+                                <div class="password-section">
+                                    <label for="decryptPasswordInput" data-i18n="aes_password_label">Password:</label>
+                                    <input type="password" id="decryptPasswordInput" class="password-input" placeholder="" data-i18n-placeholder="aes_decrypt_password_placeholder">
+                                </div>
+                                
+                                <div class="text-actions">
+                                    <button onclick="aesEncryptor.decryptText()" class="primary-btn" data-i18n="aes_decrypt_btn">Decrypt Text</button>
+                                </div>
+                                
+                                <!-- Decryption result section (hidden by default) -->
+                                <div id="decryptionResult" class="decryption-result" style="display: none;">
+                                    <h3>Decryption Result:</h3>
+                                    <textarea id="decryptedTextArea" class="result-textarea" readonly></textarea>
+                                    <div class="result-actions">
+                                        <button onclick="aesEncryptor.copyDecryptedText()" class="secondary-btn" data-i18n="aes_copy_decrypted_btn">Copy Result</button>
+                                        <button onclick="aesEncryptor.downloadDecryptedText()" class="secondary-btn" data-i18n="aes_download_decrypted_btn">Download Result</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section-divider" data-i18n="aes_or">OR</div>
+                            
+                            <!-- File decryption section -->
+                            <div class="file-input-section">
+                                <label for="encryptedFile" data-i18n="aes_select_encrypted_file">Select encrypted file to decrypt:</label>
+                                <input type="file" id="encryptedFile" />
+                                
+                                <div class="password-section">
+                                    <label for="fileDecryptPasswordInput" data-i18n="aes_password_label">Password:</label>
+                                    <input type="password" id="fileDecryptPasswordInput" class="password-input" placeholder="" data-i18n-placeholder="aes_decrypt_password_placeholder">
+                                </div>
+                                
+                                <button onclick="aesEncryptor.decryptFile()" class="primary-btn" data-i18n="aes_decrypt_file_btn">Decrypt File</button>
+                            </div>
+                        </div>
+
+                        <div class="home_inner">
+                            <div class="home_social_fixed">
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Facebook.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Instagram.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link tooltip" id="copy-email">
+                                    <img src="image/icon/Gmail.png" alt="social" class="social_img">
+                                    <span class="tooltip-text">Email: cryptomonocle@gmail.com</span>
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Github.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Youtube.png" alt="social" class="social_img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/aes.js"></script>
+    <script src="js/lang.js"></script>
+</body>
+</html>

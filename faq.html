@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/nullstyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="image/icon.ico">
+    <title data-i18n="faq">FAQ</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Додаємо перемикач мови сюди, перед хедером -->
+        <div class="lang-switcher">
+            <div class="lang-dropdown" id="language-dropdown">
+                <div class="lang-current">
+                    <img src="image/photo/en.png" alt="English flag" class="lang-flag" id="current-flag">
+                    <span class="lang-name" id="current-language">English</span>
+                    <span class="lang-arrow"></span>
+                </div>
+                <div class="lang-options">
+                    <div class="lang-option" data-lang="en">
+                        <img src="image/photo/en.png" alt="English flag" class="lang-flag">
+                        <span class="lang-name">English</span>
+                    </div>
+                    <div class="lang-option" data-lang="ua">
+                        <img src="image/photo/ua.png" alt="Ukrainian flag" class="lang-flag">
+                        <span class="lang-name">Українська</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header class="header">
+            <div class="container">
+                <div class="header_inner">
+                    <nav class="menu">
+                        <ul class="menu_list">
+                            <li class="menu_item">
+                                <a href="index.html" class="menu_link" data-i18n="home">Home</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="about.html" class="menu_link" data-i18n="about">About Us</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="tools.html" class="menu_link" data-i18n="tools">Crypto Tools</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="faq.html" class="menu_link active" data-i18n="faq">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a href="index.html" class="header_logo">
+                        <img src="image/logo.png" alt="logo" class="logo_img">
+                    </a>
+                    <div class="header_burger">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+
+            <section class="faq">
+                <div class="container">
+                    <div class="faq_inner">
+                        <h1 class="faq_title" data-i18n="faq_title">Frequently Asked Questions</h1>
+                        
+                        <div class="faq_list">
+                            <!-- Нове питання з кнопками для інструкцій -->
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q0">How do I learn more about encryption methods?</div>
+                                <div class="faq_answer" data-i18n="faq_a0">
+                                    You can download our detailed guides to learn more about the encryption methods used in Crypto Monocle. We've prepared comprehensive instructions for each encryption algorithm, including their strengths, weaknesses, and best use cases.
+                                </div>
+                                <div class="instruction-buttons">
+                                    <a href="info_en.pdf" class="instruction-btn english-btn" download>
+                                        <img src="image/photo/en.png" alt="English flag" class="btn-flag">
+                                        <span data-i18n="download_en">Download English Guide</span>
+                                    </a>
+                                    <a href="info_ua.pdf" class="instruction-btn ukrainian-btn" download>
+                                        <img src="image/photo/ua.png" alt="Ukrainian flag" class="btn-flag">
+                                        <span data-i18n="download_ua">Download Ukrainian Guide</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q1">What is Crypto Monocle?</div>
+                                <div class="faq_answer" data-i18n="faq_a1">Crypto Monocle is a web-based platform designed for secure text encryption and decryption. It's a diploma project that offers various encryption methods to protect your sensitive information.</div>
+                            </div>
+
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q2">Is my data safe when using Crypto Monocle?</div>
+                                <div class="faq_answer" data-i18n="faq_a2">Yes, all encryption and decryption operations are performed locally in your browser. Your data never leaves your device, ensuring maximum privacy and security.</div>
+                            </div>
+
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q3">What encryption methods are available?</div>
+                                <div class="faq_answer" data-i18n="faq_a3">We offer several industry-standard encryption methods. Each method comes with detailed information about its security level and recommended use cases.</div>
+                            </div>
+
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q4">How do I encrypt my text?</div>
+                                <div class="faq_answer" data-i18n="faq_a4">Simply choose an encryption method, upload a text file or enter your text in the provided field, and download the encrypted result. The process is fast and happens instantly on your device.</div>
+                            </div>
+
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q5">Can I decrypt files encrypted by others using Crypto Monocle?</div>
+                                <div class="faq_answer" data-i18n="faq_a5">Yes, as long as you have the correct decryption key and know which encryption method was used, you can decrypt any file that was encrypted using our platform.</div>
+                            </div>
+
+                            <div class="faq_item">
+                                <div class="faq_question" data-i18n="faq_q6">Is Crypto Monocle free to use?</div>
+                                <div class="faq_answer" data-i18n="faq_a6">Yes, Crypto Monocle is completely free to use. It's an educational project aimed at making encryption accessible to everyone.</div>
+                            </div>
+                        </div>
+
+                        <div class="home_inner">
+                            <div class="home_social_fixed">
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Facebook.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Instagram.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link tooltip" id="copy-email">
+                                    <img src="image/icon/Gmail.png" alt="social" class="social_img">
+                                    <span class="tooltip-text">Email: cryptomonocle@gmail.com</span>
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Github.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Youtube.png" alt="social" class="social_img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/nullstyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="image/icon.ico">
+    <title data-i18n="rsa_title">Asymmetric Encryption</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- Додаємо перемикач мови сюди, перед хедером -->
+        <div class="lang-switcher">
+            <div class="lang-dropdown" id="language-dropdown">
+                <div class="lang-current">
+                    <img src="image/photo/en.png" alt="English flag" class="lang-flag" id="current-flag">
+                    <span class="lang-name" id="current-language">English</span>
+                    <span class="lang-arrow"></span>
+                </div>
+                <div class="lang-options">
+                    <div class="lang-option" data-lang="en">
+                        <img src="image/photo/en.png" alt="English flag" class="lang-flag">
+                        <span class="lang-name">English</span>
+                    </div>
+                    <div class="lang-option" data-lang="ua">
+                        <img src="image/photo/ua.png" alt="Ukrainian flag" class="lang-flag">
+                        <span class="lang-name">Українська</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header class="header">
+            <div class="container">
+                <div class="header_inner">
+                    <nav class="menu">
+                        <ul class="menu_list">
+                            <li class="menu_item">
+                                <a href="index.html" class="menu_link" data-i18n="home">Home</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="about.html" class="menu_link" data-i18n="about">About Us</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="tools.html" class="menu_link active" data-i18n="tools">Crypto Tools</a>
+                            </li>
+                            <li class="menu_item">
+                                <a href="faq.html" class="menu_link" data-i18n="faq">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a href="index.html" class="header_logo">
+                        <img src="image/logo.png" alt="logo" class="logo_img">
+                    </a>
+                    <div class="header_burger">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="faq">
+                <div class="container">
+                    <div class="faq_inner">
+                        <h1 class="faq_title" data-i18n="rsa_title">RSA Encryption</h1>
+                        
+                        <div class="otp_container">
+                            <!-- Key generation section -->
+                            <div class="key-generation-section">
+                                <h2 data-i18n="rsa_generate_keys">Generate Keys</h2>
+                                <p class="input-hint" data-i18n="rsa_key_hint">Generate a key pair to use for encryption/decryption</p>
+                                <div class="key-size-selection">
+                                    <label data-i18n="rsa_key_size">Key Size:</label>
+                                    <select id="keySize" class="key-size-select">
+                                        <option value="1024">1024 bit</option>
+                                        <option value="2048" selected>2048 bit</option>
+                                        <option value="4096">4096 bit</option>
+                                    </select>
+                                    <div class="format-indicator" data-i18n="rsa_key_info">Larger keys are more secure but slower</div>
+                                </div>
+                                <button onclick="rsaEncryptor.generateKeyPair()" class="primary-btn" data-i18n="rsa_generate_btn">Generate Key Pair</button>
+                                
+                                <!-- Key display section (hidden by default) -->
+                                <div id="keyPairDisplay" class="key-display" style="display: none;">
+                                    <div class="key-container">
+                                        <h3 data-i18n="rsa_public_key">Public Key:</h3>
+                                        <textarea id="publicKeyDisplay" class="key-textarea" readonly></textarea>
+                                        <div class="key-actions">
+                                            <button onclick="rsaEncryptor.copyPublicKey()" class="secondary-btn" data-i18n="rsa_copy_public_btn">Copy Public Key</button>
+                                            <button onclick="rsaEncryptor.downloadPublicKey()" class="secondary-btn" data-i18n="rsa_download_public_btn">Download Public Key</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="key-container">
+                                        <h3 data-i18n="rsa_private_key">Private Key:</h3>
+                                        <textarea id="privateKeyDisplay" class="key-textarea" readonly></textarea>
+                                        <div class="key-actions">
+                                            <button onclick="rsaEncryptor.copyPrivateKey()" class="secondary-btn" data-i18n="rsa_copy_private_btn">Copy Private Key</button>
+                                            <button onclick="rsaEncryptor.downloadPrivateKey()" class="secondary-btn" data-i18n="rsa_download_private_btn">Download Private Key</button>
+                                        </div>
+                                        <div class="warning-text" data-i18n="rsa_private_warning">Keep your private key secure! Never share it with anyone.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section-divider" data-i18n="rsa_encryption">ENCRYPTION</div>
+                            
+                            <!-- Text encryption section -->
+                            <div class="text-input-section">
+                                <p class="input-hint" data-i18n="rsa_encrypt_hint">Enter text to encrypt with public key</p>
+                                <textarea id="inputText" placeholder="" class="fixed-textarea" data-i18n-placeholder="rsa_encrypt_placeholder"></textarea>
+                                
+                                <div class="key-input-section">
+                                    <label for="encryptionPublicKey" data-i18n="rsa_public_key_label">Public Key:</label>
+                                    <textarea id="encryptionPublicKey" placeholder="" class="key-input-textarea" data-i18n-placeholder="rsa_public_key_placeholder"></textarea>
+                                </div>
+                                
+                                <div class="text-actions">
+                                    <button onclick="rsaEncryptor.encryptText()" class="primary-btn" data-i18n="rsa_encrypt_btn">Encrypt Text</button>
+                                </div>
+                                
+                                <!-- Encryption results (hidden by default) -->
+                                <div id="encryptionResults" class="encryption-results" style="display: none;">
+                                    <textarea id="encryptedTextDisplay" class="encrypted-textarea" readonly></textarea>
+                                    <div class="result-actions">
+                                        <button onclick="rsaEncryptor.copyEncryptedText()" class="secondary-btn" data-i18n="rsa_copy_encrypted_btn">Copy Encrypted Text</button>
+                                        <button onclick="rsaEncryptor.downloadEncryptedText()" class="secondary-btn" data-i18n="rsa_download_encrypted_btn">Download Encrypted Text</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section-divider" data-i18n="rsa_decryption">DECRYPTION</div>
+                            
+                            <!-- Text decryption section -->
+                            <div class="text-input-section">
+                                <p class="input-hint" data-i18n="rsa_decrypt_hint">Enter encrypted text to decrypt with private key</p>
+                                <textarea id="encryptedInput" placeholder="" class="fixed-textarea" data-i18n-placeholder="rsa_decrypt_placeholder"></textarea>
+                                
+                                <div class="key-input-section">
+                                    <label for="decryptionPrivateKey" data-i18n="rsa_private_key_label">Private Key:</label>
+                                    <textarea id="decryptionPrivateKey" placeholder="" class="key-input-textarea" data-i18n-placeholder="rsa_private_key_placeholder"></textarea>
+                                </div>
+                                
+                                <div class="text-actions">
+                                    <button onclick="rsaEncryptor.decryptText()" class="primary-btn" data-i18n="rsa_decrypt_btn">Decrypt Text</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Decryption result section (hidden by default) -->
+                            <div id="decryptionResult" class="decryption-result" style="display: none;">
+                                <div class="result-container">
+                                    <h3 data-i18n="rsa_decrypt_result">Decryption Result:</h3>
+                                    <textarea id="decryptedTextArea" class="result-textarea" readonly></textarea>
+                                    <div class="result-actions">
+                                        <button onclick="rsaEncryptor.copyDecryptedText()" class="secondary-btn" data-i18n="rsa_copy_decrypted_btn">Copy Result</button>
+                                        <button onclick="rsaEncryptor.downloadDecryptedText()" class="secondary-btn" data-i18n="rsa_download_decrypted_btn">Download Result</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="home_inner">
+                            <div class="home_social_fixed">
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Facebook.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Instagram.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link tooltip" id="copy-email">
+                                    <img src="image/icon/Gmail.png" alt="social" class="social_img">
+                                    <span class="tooltip-text">Email: cryptomonocle@gmail.com</span>
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Github.png" alt="social" class="social_img">
+                                </a>
+                                <a href="#" class="home_social--link">
+                                    <img src="image/icon/Youtube.png" alt="social" class="social_img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js"></script>
+    <script src="js/rsa.js"></script>
+    <script src="js/lang.js"></script>
+</body>
+</html>
